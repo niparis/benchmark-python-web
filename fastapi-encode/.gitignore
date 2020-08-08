@@ -1,0 +1,15 @@
+# IDE Fragments
+/.vscode
+*__pycache__*
+*.idea*
+
+# Environment Files
+/.env
+
+# reports for code quality
+.artifacts/
+
+# sonar scanner report
+.scannerwork/
+
+.coverage

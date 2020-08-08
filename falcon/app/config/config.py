@@ -41,7 +41,7 @@ class DbConfig(object):
 @related.immutable
 class GunicornConfig(object):
     bind = related.StringField(default="localhost:8000")
-    workers = related.IntegerField(default=4)
+    workers = related.IntegerField(default=1)
     timeout = related.IntegerField(default=3000)
     reload = related.BooleanField(default=False)
 

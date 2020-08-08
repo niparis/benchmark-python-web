@@ -1,0 +1,1 @@
+exec "gunicorn -k uvicorn.workers.UvicornWorker -c app/gunicorn_conf.py app.main:app"

@@ -21,6 +21,9 @@ psycopg2-binary = "^2.8.5"
 ipdb = "^0.13.3"
 rapidjson = "^1.0.0"
 python-rapidjson = "^0.9.1"
+falcon-swagger-ui = "^1.2.1"
+vmprof = "^0.4.15"
+py-spy = "^0.3.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -20,7 +20,7 @@ def cli() -> None:
     logger.warning(f'Questionnaire-Service version {version} [initated]')
 
 
-@click.option('--port', type=int, default=8001)
+@click.option('--port', type=int, default=8000)
 @click.option('--profile', is_flag=True, default=False)
 @cli.command()
 def dev(profile, port) -> None:

@@ -8,6 +8,7 @@ from falcon import media
 import rapidjson
 from functools import partial
 from rapidjson import DM_ISO8601, UM_CANONICAL, NM_DECIMAL
+from falcon_swagger_ui import register_swaggerui_app
 
 # from .database.manager import db
 from app.config import appconfig, Environment
@@ -23,6 +24,8 @@ from app import __version__
 
 logger = logging.getLogger(__name__)
 
+SWAGGERUI_URL = '/swagger'  # without trailing slash
+SCHEMA_URL = 'http://localhost:8001/v2/swagger.json'
 
 class FalconService(falcon.API):
     def __init__(self, *args, **kargs):

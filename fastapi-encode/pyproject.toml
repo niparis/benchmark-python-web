@@ -1,0 +1,90 @@
+[tool.poetry]
+name = "fastapi-gino-arq-uvicorn"
+version = "0.4.0"
+description = "High-performance Async REST API, in Python. FastAPI + GINO + Arq + Uvicorn (w/ Redis and PostgreSQL)."
+authors = ["Leo Sussan <leosussan@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.54.1"
+gino = "^1.0.0"
+sqlalchemy-utils = "^0.36.5"
+alembic = "^1.4.2"
+psycopg2-binary = "^2.8.5"
+uvicorn = "^0.11.5"
+email_validator = "^1.1.0"
+sentry-sdk = "^0.14.3"
+gino-starlette = "^0.1.1"
+pydantic = {extras = ["dotenv"], version = "^1.6.1"}
+taskipy = "^1.2.1"
+sqlbag = "^0.1.1579049654"
+migra = "^1.0.1596263757"
+databases = {extras = ["postgresql"], version = "^0.3.2"}
+vmprof = "^0.4.15"
+py-spy = "^0.3.3"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+bandit = "^1.6.2"
+flake8 = "^3.8.1"
+rope = "^0.17.0"
+watchgod = "^0.6"
+pre-commit = "^2.4.0"
+isort = {version = "^4.3.21", extras = ["pyproject"]}
+pytest = "^6.0.1"
+pytest-asyncio = "^0.14.0"
+pytest-cov = "^2.10.0"
+requests = "^2.24.0"
+pylint = "^2.5.3"
+ipdb = "^0.13.3"
+sqlacodegen = "^2.3.0"
+ipykernel = "^5.3.4"
+notebook = "^6.1.1"
+
+[tool.taskipy.tasks]
+# Launch Commands for Local Development
+app = "uvicorn app.main:app --reload"
+app-prod = 'gunicorn -k uvicorn.workers.UvicornWorker -c app/gunicorn_conf.py app.main:app'
+test = "pytest --verbose --cov=app --cov=tests --cov-report=term-missing --cov-report=xml:.artifacts/coverage.xml --junit-xml=.artifacts/tests.xml"
+# migrations
+manage = "python app/manage.py"
+# Docker-Compose Tasks
+compose-up = "docker-compose -f setup/docker/docker-compose.local.yml -f setup/docker/docker-compose.yml up --build"
+compose-down = "docker-compose -f setup/docker/docker-compose.local.yml -f setup/docker/docker-compose.yml down --remove-orphans"
+
+[tool.flake8]
+ignore = "E402, E203, E266, E501, W503, F403, F401, app/infrastructure/database/migrations/"
+max-line-length = 79
+max-complexity = 18
+select = "B,C,E,F,W,T4,B9"
+per-file-ignores ="""
+    app/models/orm/migrations/env.py:E402
+    app/main.py:E402
+    app/worker.py:E402
+"""
+[tool.black]
+line-length = 79
+target-version = ['py38']
+exclude = '''
+/(
+    \.git
+  | .vscode
+  | build
+  | dist
+  | .scripts
+  | .git-crypt
+  | services/.scripts
+  | services/.vscode
+  | core/.scripts
+  | core/.vscode
+)/
+'''
+
+[tool.isort]
+line_length = 79
+multi_line_output = 3
+not_skip = "__init__.py"
+use_parentheses = true
+include_trailing_comma = true
+force_grid_wrap = 0
+known_third_party = ["alembic", "click", "databases", "fastapi", "pydantic", "pytest", "sentry_sdk", "sqlalchemy", "sqlalchemy_utils", "starlette"]

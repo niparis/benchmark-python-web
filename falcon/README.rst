@@ -12,5 +12,9 @@ python manage.py run
 
 A. later
 
+psql -c "truncate table users;" -d falcon
 poetry shell
 python manage.py run
+
+
+python -m vmprof --config vmprof.ini --web manage.py run                         
