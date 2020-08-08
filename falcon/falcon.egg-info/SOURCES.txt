@@ -1,0 +1,7 @@
+README.rst
+setup.py
+falcon/__init__.py
+falcon.egg-info/PKG-INFO
+falcon.egg-info/SOURCES.txt
+falcon.egg-info/dependency_links.txt
+falcon.egg-info/top_level.txt
